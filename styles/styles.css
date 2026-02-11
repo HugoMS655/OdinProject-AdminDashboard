@@ -13,12 +13,37 @@ main {
   display: grid;
   grid-template-columns: 1fr 5fr;
   grid-template-rows: repeat(7, 1fr);
+  height: 100%;
+}
+
+.logo {
+  width: 12px;
+  height: 12px;
+}
+
+.sidebar .logo {
+  filter: brightness(0) invert(1);
+}
+
+p,
+span {
+  font-family: Roboto;
+}
+
+.sidebar span {
+  color: white;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.sidebar-header span {
+  font-size: 18px;
+  font-weight: 700;
 }
 
 /*SIDEBAR*/
 
 .sidebar {
-  padding-top: 10px;
   background-color: #2596be;
   grid-column: 1;
   grid-row: 1/8;
@@ -28,11 +53,17 @@ main {
     "sidebar-header"
     "main-nav"
     "secondary-nav";
-  align-items: start;
 }
 
 .sidebar-header {
+  padding-top: 10px;
   grid-area: sidebar-header;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-content: start;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
 }
 
 .sidebar-header-logo {
@@ -43,19 +74,30 @@ main {
 
 .main-nav {
   grid-area: main-nav;
-  display: grid;
-  gap: 10px;
 }
 
 .secondary-nav {
   grid-area: secondary-nav;
-  display: grid;
-  gap: 10px;
 }
 
-.sidebar-header,
 .main-nav,
 .secondary-nav {
+  display: grid;
+  width: fit-content;
+  gap: 10px;
+  align-content: start;
+}
+
+.main-nav a,
+.secondary-nav a {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.sidebar > * {
   padding-left: 15px;
 }
 
@@ -77,22 +119,52 @@ main {
 .header-upper {
   grid-area: header-upper;
   display: grid;
-  grid-template-columns: 3fr 2fr;
+  grid-template-columns: auto auto;
   grid-template-areas: "search-container profile-container";
-  padding-left: 20px;
 }
 
 .search-container {
   grid-area: search-container;
+  justify-self: start;
+  padding-left: 20px;
+  width: 100%;
+}
+
+.searchbar-container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 5px;
+  align-items: center;
+}
+
+.searchbar-container button {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.searchbar-container input {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  background-color: #e0e6ee;
 }
 
 .profile-container {
   grid-area: profile-container;
   display: grid;
   grid-auto-flow: column;
+  justify-self: end;
   justify-content: center;
-  align-content: start;
+  align-items: center;
   gap: 10px;
+  padding-right: 20px;
+}
+
+.profile-container button {
+  border: none;
+  background-color: white;
 }
 
 .small-profile-logo {
@@ -100,12 +172,17 @@ main {
   height: 24px;
 }
 
+.profile-name {
+  color: black;
+  font-size: 10px;
+}
+
 /*LOWER HEADER SECTION*/
 
 .header-lower {
   grid-area: header-lower;
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: auto auto;
   grid-template-areas: "lower-left-side lower-header-buttons";
   padding-left: 20px;
 }
@@ -113,22 +190,51 @@ main {
 .lower-left-side {
   grid-area: lower-left-side;
   display: grid;
-  grid-auto-flow: column;
+  grid-template-columns: auto 1fr;
+  justify-self: start;
   justify-content: start;
   align-items: center;
   gap: 10px;
 }
 
 .big-profile-logo {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
+}
+
+.profile-text {
+  display: grid;
+  align-content: center;
+}
+
+.greetings-text {
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.user-name {
+  font-weight: 700;
 }
 
 .lower-header-buttons {
   grid-area: lower-header-buttons;
   display: grid;
   grid-auto-flow: column;
-  place-items: center;
+  justify-self: end;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding-right: 20px;
+}
+
+.lower-header-buttons button {
+  border: none;
+  border-radius: 10px;
+  color: white;
+  background-color: #1992d4;
+  font-size: 8px;
+  font-weight: 600;
+  padding: 5px 15px;
 }
 
 /*MAIN CONTENT*/
@@ -137,14 +243,22 @@ main {
   grid-row: 2/8;
   grid-column: 2;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-areas: "projects projects main-right-side";
+  grid-template-columns: 2fr 1fr;
   background-color: #e0e6ee;
+  gap: 15px;
+  padding: 15px;
+  align-items: stretch;
+  height: 100%;
 }
 
-.projects {
-  grid-area: projects;
-  padding: 15px;
+.projects,
+.main-right-side {
+  height: 100%;
+}
+
+.projects-header {
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .project-items {
@@ -160,6 +274,17 @@ main {
   background-color: white;
   padding: 15px;
 }
+
+.proj-title {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.proj-description {
+  font-size: 8px;
+  font-weight: 300;
+}
+
 .proj-item-icons {
   justify-self: end;
 }
@@ -168,25 +293,30 @@ main {
   height: 12px;
 }
 
+/*ANNOUNCEMENTS AND TRENDING */
+
 .main-right-side {
-  grid-area: main-right-side;
   display: grid;
   grid-template-rows: repeat(2, 1fr);
-  grid-template-areas:
-    "announcements"
-    "trending";
 }
 
-.announcements {
-  grid-area: announcements;
-  padding: 15px;
+.announcements-header {
+  font-size: 14px;
+  font-weight: 600;
 }
 .announcement-items {
   display: grid;
   border-radius: 5px;
   background-color: white;
-  padding: 15px;
-  text-align: center;
+  padding: 25px;
+  text-align: start;
+}
+.announcement-item {
+  border-bottom: 1px solid black;
+}
+
+.announcement-items > .announcement-item:last-of-type {
+  border: none;
 }
 
 .announcement-title {
@@ -196,11 +326,12 @@ main {
 
 .announcement-description {
   font-size: 8px;
-  font-weight: 300px;
+  font-weight: 300;
 }
 
-.trending {
-  grid-area: trending;
+.trending-header {
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .trending-items {
@@ -214,8 +345,14 @@ main {
 
 .trend-item {
   display: grid;
-  grid-auto-flow: column;
-  place-items: center;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 10px;
+}
+
+.trending-text {
+  display: grid;
+  align-content: center;
 }
 
 .trending-name {
@@ -226,91 +363,4 @@ main {
   color: black;
   font-size: 8px;
   font-weight: 300;
-}
-
-.logo {
-  width: 12px;
-  height: 12px;
-}
-
-.sidebar .logo {
-  filter: brightness(0) invert(1);
-}
-
-p,
-span {
-  font-family: Roboto;
-}
-
-span {
-  color: white;
-  font-weight: 600;
-  font-size: 12px;
-}
-
-.sidebar-header span {
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.profile-name {
-  color: black;
-  font-size: 10px;
-}
-
-.user-name {
-  font-weight: 700;
-}
-
-.greetings-text {
-  font-size: 10px;
-  font-weight: 700;
-}
-
-.projects-header,
-.announcements-header,
-.trending-header {
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.proj-title {
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.proj-description {
-  font-size: 8px;
-  font-weight: 300;
-}
-
-.lower-header-buttons button {
-  border: none;
-  border-radius: 10px;
-  color: white;
-  background-color: #1992d4;
-  font-size: 8px;
-  font-weight: 600;
-  padding: 5px 15px;
-}
-
-.searchbar-container {
-  display: grid;
-  grid-template-columns: auto 1fr;
-}
-
-.searchbar-container button {
-  border: none;
-  background-color: white;
-}
-
-.profile-container button {
-  border: none;
-  background-color: white;
-}
-
-.searchbar-container input {
-  border: none;
-  border-radius: 10px;
-  background-color: #e0e6ee;
 }
